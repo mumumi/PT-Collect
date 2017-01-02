@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+    <meta name="author" content="Mumumi" />
+    <meta name="revised" content="Mumumi, 2017/1/2/" />
+    <meta name="description" content="All PT Sites in One Page." />
+    <meta name="keywords" content="PT, Auto-Page-Size, ZoomIn-When-MouseOver" />
+	<title>PT Collect</title>
+	<style>
+        body{
+            text-align: center;
+        }
+		iframe{
+			width: 80%;
+		}
+        .activate{
+            height:5rem;
+        }
+        .deactivate{
+            height:1rem;
+        }
+	</style>
+    <script>
+        (function (doc, win) {
+            var sites = ["https://totheglory.im","https://sg.hdchina.club","https://chdbits.co","https://hdsky.me","https://open.cd","https://shenzhan.in","https://pt.hd4fans.org","http://hdtime.org","http://u2.dmhy.org","http://pt.keepfrds.com","https://pt.antsoul.com","https://freshon.tv","https://www.morethan.tv","http://jpopsuki.eu","https://waffles.fm","https://iptorrents.com","http://www.td.af","https://privatehd.to","https://hd-space.org","https://www.hd-bits.com","https://blu-bits.com","http://teracod.org","https://www.acid-lounge.org.uk","https://www.t411.in/torrents/search/","https://rutracker.org","http://www.afrbits.com","http://hd-sportbits.org","https://www.cgpeers.com","http://hellastz.com","https://www.xspeeds.eu","http://tp.m-team.cc","http://hdcmct.org/","http://hdqueen.com","https://pt.hit.edu.cn","http://et8.org","http://hdhome.org","http://www.hyperay.cc","https://pt.hdupt.com"];
+            var docEl = doc.documentElement;
+            var resizeEvt = 'orientationchange' in win ? 'orientationchange' : 'resize';
+            zoomIn = function() {
+                this.setAttribute("class","activate");
+                var ost = this.getBoundingClientRect().top;
+                var fts = parseInt(docEl.style.fontSize.replace(/px/,""));
+                win.scrollBy(0,(ost-0.5*fts))
+            };
+            zoomOut = function() {
+                this.setAttribute("class","deactivate");
+            };
+            bindEvt = function () {
+                recalc()
+                for (var i in sites){
+                    var ifr = doc.createElement("iframe");
+                    ifr.src = sites[i];
+                    ifr.setAttribute("frameBorder","0");
+                    ifr.setAttribute("class","deactivate");
+                    doc.body.appendChild(ifr);
+                }
+                var ifrs = doc.querySelectorAll('iframe');
+                for (var i=0; i<ifrs.length; i++){
+                    ifrs[i].addEventListener("mouseover",zoomIn,false);
+                    ifrs[i].addEventListener("mouseout",zoomOut,false);
+                };
+            };
+            recalc = function () {
+                var clientWidth = docEl.clientWidth;
+                if (!clientWidth) return;
+                docEl.style.fontSize = 20 * (clientWidth / 320) + 'px';
+            };
+            if (!doc.addEventListener) return;
+            win.addEventListener(resizeEvt, recalc, false);
+            doc.addEventListener('DOMContentLoaded', bindEvt, false);
+        })(document, window); 
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
